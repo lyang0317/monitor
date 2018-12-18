@@ -4,7 +4,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>cm.pharmaking.order</groupId>
+  <groupId>com.pharmaking.order</groupId>
   <artifactId>monitor</artifactId>
   <version>1.0-SNAPSHOT</version>
   <modules>
@@ -85,22 +85,22 @@
     <dependencies>
       <dependency>
         <artifactId>common</artifactId>
-        <groupId>cm.pharmaking.order</groupId>
+        <groupId>com.pharmaking.order</groupId>
         <version>1.0-SNAPSHOT</version>
       </dependency>
       <dependency>
         <artifactId>dao</artifactId>
-        <groupId>cm.pharmaking.order</groupId>
+        <groupId>com.pharmaking.order</groupId>
         <version>1.0-SNAPSHOT</version>
       </dependency>
       <dependency>
         <artifactId>service</artifactId>
-        <groupId>cm.pharmaking.order</groupId>
+        <groupId>com.pharmaking.order</groupId>
         <version>1.0-SNAPSHOT</version>
       </dependency>
       <dependency>
         <artifactId>web</artifactId>
-        <groupId>cm.pharmaking.order</groupId>
+        <groupId>com.pharmaking.order</groupId>
         <version>1.0-SNAPSHOT</version>
       </dependency>
     </dependencies>
