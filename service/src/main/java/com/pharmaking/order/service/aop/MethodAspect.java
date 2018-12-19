@@ -9,7 +9,9 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.aspectj.lang.reflect.SourceLocation;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import java.lang.reflect.Method;
 
@@ -44,10 +46,11 @@ public class MethodAspect {
     @After("methodMonitor()")
     public void doAfter(JoinPoint joinPoint) throws Throwable {
         Long callTime = System.currentTimeMillis() - threadLocal.get();
+        String className = joinPoint.getTarget().getClass().getName();
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-        Method method = methodSignature.getMethod();
+        String methodName = methodSignature.toString();
         LogContext logContext = new LogContext();
-        logContext.setMethodName(method.getName());
+        logContext.setMethodName(methodName);
         logContext.setCallTime(Integer.valueOf(String.valueOf(callTime)));
         WorkingPool.getWorkingQueue().add(logContext);
     }

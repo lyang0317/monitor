@@ -13,7 +13,7 @@ public class MonitorTest extends BaseTest {
     public void testService(){
         methodLogService.selectList();
         try {
-            Thread.sleep(5000);
+            Thread.sleep(65000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

@@ -6,16 +6,16 @@ import org.springframework.beans.BeanUtils;
 @Data
 public class MethodLogDTO {
 
-    private String projectName;
-    private String moduleName;
+    private String projectCode;
+    private String moduleCode;
     private String name;
     private Integer callTime;
 
     public MethodLogDTO() {}
 
     public MethodLogDTO(LogContext logContext, MonitorConfig monitorConfig) {
-        this.projectName = monitorConfig.getProjectCode();
-        this.moduleName = monitorConfig.getModuleCode();
+        this.projectCode = monitorConfig.getProjectCode();
+        this.moduleCode = monitorConfig.getModuleCode();
         this.name = logContext.getMethodName();
         this.callTime = logContext.getCallTime();
     }

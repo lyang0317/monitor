@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Slf4j
-@Component
-public class WorkingExecutor implements InitializingBean {
+@Service
+public class WorkingExecutor {
 
     @Autowired
     private MethodLogService methodLogService;
@@ -20,16 +20,7 @@ public class WorkingExecutor implements InitializingBean {
     @Autowired
     private MonitorConfig monitorConfig;
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                doWork();
-            }
-        }).start();
-    }
-
+    @Async
     public void doWork() {
         while (true) {
             Object work = null;
@@ -38,10 +29,16 @@ public class WorkingExecutor implements InitializingBean {
             } catch (InterruptedException e) {
                 log.error("阻塞队列获取中断异常");
             }
-            if(work != null) {
-                LogContext logContext = (LogContext) work;
-                MethodLogDTO methodLogDTO = new MethodLogDTO(logContext, monitorConfig);
-                methodLogService.insert(methodLogDTO);
+            try {
+                if(work != null) {
+                    LogContext logContext = (LogContext) work;
+                    if(monitorConfig.isSwitchFlag()) {
+                        MethodLogDTO methodLogDTO = new MethodLogDTO(logContext, monitorConfig);
+                        methodLogService.insert(methodLogDTO);
+                    }
+                }
+            } catch (Exception e) {
+                log.error("记录异常", e);
             }
         }
     }
