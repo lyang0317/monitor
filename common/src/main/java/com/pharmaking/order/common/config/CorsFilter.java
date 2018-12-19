@@ -1,4 +1,4 @@
-package com.pharmaking.order.common;
+package com.pharmaking.order.common.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;

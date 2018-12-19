@@ -1,6 +1,7 @@
 package com.pharmaking.order.service.aop;
 
-import com.pharmaking.order.service.MethodMonitorHandler;
+import com.pharmaking.order.common.model.LogContext;
+import com.pharmaking.order.service.WorkingPool;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -23,18 +24,16 @@ public class MethodAspect {
      * 定义切入点
      */
     @Pointcut("@annotation(com.pharmaking.order.common.annotation.MethodMonitor)")
-    public void lockMethod(){}
+    public void methodMonitor(){}
 
     /**
      * 前置通知
      * @param joinPoint
      * @throws Throwable
      */
-    @Before("lockMethod()")
+    @Before("methodMonitor()")
     public void doBefore(JoinPoint joinPoint) throws Throwable {
-        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-        Method method = methodSignature.getMethod();
-        MethodMonitorHandler.handle();
+        threadLocal.set(System.currentTimeMillis());
     }
 
     /**
@@ -42,9 +41,15 @@ public class MethodAspect {
      * @param joinPoint
      * @throws Throwable
      */
-    @After("lockMethod()")
+    @After("methodMonitor()")
     public void doAfter(JoinPoint joinPoint) throws Throwable {
-        MethodMonitorHandler.handle();
+        Long callTime = System.currentTimeMillis() - threadLocal.get();
+        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
+        Method method = methodSignature.getMethod();
+        LogContext logContext = new LogContext();
+        logContext.setMethodName(method.getName());
+        logContext.setCallTime(Integer.valueOf(String.valueOf(callTime)));
+        WorkingPool.getWorkingQueue().add(logContext);
     }
 
 }

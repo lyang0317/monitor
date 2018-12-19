@@ -1,4 +1,4 @@
-package com.pharmaking.order.common;
+package com.pharmaking.order.common.config;
 
 import com.pharmaking.groundhog.passport.web.security.EnvironmentHolder;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class OrderEnvironmentHolder implements EnvironmentHolder {
 
 
-    @Value("${domain:default}")
+    @Value("${model:default}")
     private String domain;
 
     @Value("${env:default}")
