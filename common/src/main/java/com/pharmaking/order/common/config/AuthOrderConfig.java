@@ -1,4 +1,4 @@
-package com.pharmaking.order.common.config;
+/*package com.pharmaking.order.common.config;
 
 import com.pharmaking.groundhog.passport.web.security.AnonymousAuthentication;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,5 +31,5 @@ public class AuthOrderConfig {
         return authentication;
     }
 
-}
+}*/
 

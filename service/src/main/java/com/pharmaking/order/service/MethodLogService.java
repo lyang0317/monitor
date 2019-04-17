@@ -11,14 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
+//@Transactional
 public class MethodLogService {
 
-    @Autowired
+    //@Autowired
     private MethodLogMapper methodLogMapper;
 
     public void insert(MethodLogDTO methodLogDTO) {
-        methodLogMapper.insert(methodLogDTO.toDO());
+        //methodLogMapper.insert(methodLogDTO.toDO());
     }
 
     @MethodMonitor

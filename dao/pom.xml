@@ -29,7 +29,7 @@
     </dependencies>
 
     <build>
-        <plugins>
+        <!--<plugins>
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
@@ -40,6 +40,6 @@
                     <overwrite>true</overwrite>
                 </configuration>
             </plugin>
-        </plugins>
+        </plugins>-->
     </build>
 </project>
